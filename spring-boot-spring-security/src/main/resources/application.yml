@@ -1,0 +1,71 @@
+# 服务参数
+server:
+  port: 8090
+
+# 应用名称
+spring:
+  application:
+    name: spring-boot-spring-security
+
+  # json format
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+
+#application:
+#  security:
+#    token:
+#      # 令牌请求头
+#      header: Authorization
+#      # 令牌签发对象类型
+#      audience: app_name
+#      # 访问令牌过期时间（单位：秒，默认30分钟）
+#      accessTokenExpire: 300 * 60
+#      # 刷新令牌的过期时间（单位：秒，默认30天）
+#      refreshTokenExpire: 60 * 60 * 24 * 30
+#      # 令牌RSA私钥
+#      rsaPrivateKey: MIIBVQIBADANBgkqhkiG9w0BAQEFAASCAT8wggE7AgEAAkEA6K" +
+#        "7kQd+rTtlDfpFcFw9BBempm69CIBf1OarIB8StmDHaKk4T9Vt16PA1SjzYusIVWf5A3LQZn9qGwfT27jCU0QID" +
+#        "AQABAkA0pw7D0UdEiml5hI8gMLV4Dw3wStJdzM4TBJBLIbhejcrkS4GJ2Ej0xls+AUGWmA" +
+#        "CRB/jmXTv/DO5Gdk3DzrZ5AiEA+MKIlj1XQAtYH5F83XMrZSEo7vnSgo/zbpY7NpBWMF8CIQDvdJK+Jy" +
+#        "d7EbQeWLp28wt/53vm/gPmvXEirUB/QFOIzwIhAMNoRNUIAHbNsn6x0Y0/gBIj1zzKP+PR4l63YnI9NYc" +
+#        "vAiEApPHQA1xFPek8AYttJnLVAQ4bs0pWtaLZQ+HEA+PzptECIBfxaSFBVBUuRYm53lLNQAU8XCTXZenvbxSq4KTDZcpY
+#      # 令牌RSA公钥
+#      rsaPublicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAOiu5EHfq07ZQ36RXBcPQQXpqZuvQiAX9" +
+#        "TmqyAfErZgx2ipOE/VbdejwNUo82LrCFVn+QNy0GZ/ahsH09u4wlNECAwEAAQ==
+#
+#    rateLimit:
+#      # 是否开启限流
+#      enabled: false
+#      # 令牌桶的频率（令牌桶模式有效）
+#      tokenBucketRate: 1
+#      # 刷新时间区间（缓存模式有效）
+#      interval: 5 * 60L
+#      # ip频率（缓存模式有效）
+#      ipRate: 5
+#      # 凭证频率（缓存模式有效）
+#      principalRate: 5
+#
+#    replayAttack:
+#      # 是否开启防重放攻击
+#      enabled: false
+#      # 过期时间（秒）
+#      expire: 5 * 60L
+#
+#    stealLink:
+#      # 是否开启防盗链攻击
+#      enabled: false
+#      # 选择白名单或者黑名单
+#      listType: BLACK_LIST
+#      # 黑名单列表
+#      blackList: -http://127.0.0.1:9000
+#
+#    xssAttack:
+#      # 是否开启防XSS攻击
+#      enabled: false
