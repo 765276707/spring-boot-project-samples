@@ -1,0 +1,17 @@
+# 服务参数
+server:
+  port: 8090
+
+# 应用名称
+spring:
+  application:
+    name: spring-boot-encrypt-api
+  # json format
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+# 配置已有算法
+application:
+  crypt:
+    type: rsa
