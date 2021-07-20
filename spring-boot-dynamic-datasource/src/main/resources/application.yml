@@ -1,0 +1,35 @@
+# 服务参数
+server:
+  port: 8090
+
+# 日志参数
+logging:
+  level:
+    # 打印sql日志
+    com.aurora.dds.mapper: debug
+
+# 应用参数
+spring:
+  application:
+    name: spring-boot-dynamic-datasource
+
+  # 默认的主数据源，管理租户信息
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/default_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: test_user
+    password: ysys1314
+
+# mybatis 配置
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations:
+    - classpath:mybatis/mapper/*.xml
+
+# pagehelper 配置
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  helper-dialect: mysql
+  params: count=countSql

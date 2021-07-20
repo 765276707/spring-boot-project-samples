@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--
+        主要配置
+    -->
+    <context id="DB2Tables" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--
+            集成 Tk.Mybatis
+        -->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="caseSensitive" value="false"/>
+        </plugin>
+
+
+        <!-- 不生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--
+            数据库链接
+            WARN : java项目中使用org.mybatis.generator生成mysql数据库实体时，
+                 由于mysql数据库中存在多个库，如果库中出现重复表时，会出现生成的实
+                 体代码出现重复问题，原因是数据库生成实体时会扫描所有的库.
+            解决方案：connectionURL添加 &nullCatalogMeansCurrent=true
+        -->
+        <jdbcConnection
+                driverClass="com.mysql.cj.jdbc.Driver"
+                connectionURL="jdbc:mysql://127.0.0.1:3306/default_db?useUnicode=true&amp;characterEncoding=UTF-8
+                                    &amp;serverTimezone=GMT%2B8&amp;allowMultiQueries=true&amp;nullCatalogMeansCurrent=true"
+                userId="test_user"
+                password="ysys1314">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 指定javaBean的生成位置 -->
+        <javaModelGenerator
+                targetPackage="com.aurora.dds.entity"
+                targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 指定sql映射文件的生成位置 -->
+        <sqlMapGenerator
+                targetPackage="mybatis.mapper"
+                targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- 指定dao接口生成的位置 mapper接口 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.aurora.dds.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+        <!--
+            需要逆向的表,
+            tenant： 租户表
+            area： 测试用的数据表
+        -->
+        <table tableName="tenant" domainObjectName="Tenant"/>
+        <table tableName="area" domainObjectName="Area"/>
+
+    </context>
+</generatorConfiguration>
