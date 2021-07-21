@@ -1,0 +1,10 @@
+# 服务参数
+server:
+  port: 8090
+
+# 应用名称
+spring:
+  application:
+    name: spring-boot-aop-logger
+
+
