@@ -1,0 +1,13 @@
+# 服务参数
+server:
+  port: 8090
+
+# 应用名称
+spring:
+  application:
+    name: spring-boot-samples-websocket
+
+  # 页面模板配置
+  thymeleaf:
+    prefix: classpath:/pages/
+    cache: false

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket示例</title>
+    <script src="sockjs.min.js"></script>
+    <script src="stomp.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+</head>
+
+<body>
+
+    当前用户名：<span id="showUsername"></span>
+    <br><br>
+
+    <input type="text" id="username" value=""/>
+    <button id="setUserName">设置用户</button>
+    <br><br>
+
+    接受用户：<input type="text" id="user_destination" value=""/>
+    消息内容：<input type="text" id="user_body" value=""/>
+    <button id="sendUser">发送私信</button>
+    <br><br>
+
+
+    公告内容：<input type="text" id="all_body" value=""/>
+    <button id="sendAll">发送公告</button>
+    <br><br>
+
+    <textarea id="msg_box" cols="100" rows="20"></textarea>
+
+
+    <script>
+        // Socket服务端地址，可配置
+        const socketServerAddr = 'http://localhost:8090/socket'
+        let username = null
+        let stompClient = null
+        let socketTimer = null
+
+        /**
+         * 链接Socket服务器
+         */
+        function connect() {
+            let socket = new SockJS(socketServerAddr)
+            // 获取STOMP子协议的客户端对象
+            stompClient = Stomp.over(socket)
+            // 请求头
+            let headers = {
+                Authorization: "xxxxxxxxxxxx"
+            }
+            // 发起连接请求
+            stompClient.connect(headers, () => {
+
+                console.log('【日志】链接Socket服务成功')
+
+                // 订阅私信
+                stompClient.subscribe('/queue/user/'+username, function (response) {
+                    var content = $('#msg_box').val();
+                    $('#msg_box').html(content + '\n【我的消息】' + response.body);
+                })
+
+                // 订阅公告
+                stompClient.subscribe('/topic/public', function (response) {
+                    var content = $('#msg_box').val();
+                    $('#msg_box').html(content + '\n【系统公告】' + response.body);
+                })
+
+            }, (error) => {
+                // 连接发生错误时触发重连
+                socketTimer && clearTimeout(socketTimer);
+                socketTimer = setTimeout(function () {
+                    connect();
+                }, 3000);
+            });
+        }
+
+        /**
+         * 断开链接Socket服务器
+         */
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+        }
+
+        /**
+         * 发送私信
+         */
+        $("#sendUser").click(function(){
+            console.log('----> 发送消息')
+            let destination = $('#user_destination').val()
+            let body = $('#user_body').val()
+            stompClient.send('/socket/sendUser', {},
+                JSON.stringify(
+                    {
+                        'origin': username,
+                        'destination': destination,
+                        'body': body
+                    }
+                )
+            )
+        })
+
+        /**
+         * 发送公告
+         */
+        $("#sendAll").click(function(){
+            console.log('----> 发送公告')
+            let body = $('#all_body').val()
+            stompClient.send('/socket/sendAll', {},
+                JSON.stringify(
+                    {
+                        'body': body
+                    }
+                )
+            )
+        })
+
+        /**
+         * 设置用户名
+         */
+        $("#setUserName").click(function(){
+            // 设置当前用户，模拟登录
+            username = $('#username').val();
+            // 展示当前用户
+            $('#showUsername').text(username)
+            // 链接socket
+            connect();
+        })
+
+        /**
+         * 初始化检测是否设置了用户名
+         */
+        $(function () {
+            if ($('#username').val() === "") {
+                $('#showUsername').text('==请设置您的用户名==')
+            }
+        })
+
+    </script>
+
+</body>
+</html>
