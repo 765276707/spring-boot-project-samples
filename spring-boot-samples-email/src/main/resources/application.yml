@@ -1,0 +1,26 @@
+# 服务参数
+server:
+  port: 8090
+
+# 应用名称
+spring:
+  application:
+    name: spring-boot-samples-email
+
+  # 邮箱服务参数
+  mail:
+    # qq邮箱
+    host: smtp.qq.com
+    # 端口号
+    port: 587
+    # 邮箱账号
+    username: xxxxxxxxx@qq.com
+    # smtp服务秘钥
+    password: xxxxxxxxxxxxxxxx
+    # 默认编码
+    default-encoding: UTF-8
+
+  # 页面模板配置
+  thymeleaf:
+    prefix: classpath:/thymeleaf/
+    cache: false

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<h5>尊敬的测试用户，十分感谢您的配置，您的信息如下：</h5>
+<table border="1">
+    <tr>
+        <td>账号</td>
+        <td th:text="${username}"></td>
+    </tr>
+    <tr>
+        <td>性别</td>
+        <td th:text="${gender}"></td>
+    </tr>
+    <tr>
+        <td>生日</td>
+        <td th:text="${birthday}"></td>
+    </tr>
+</table>
+</body>
+</html>
