@@ -1,0 +1,16 @@
+# 服务参数
+server:
+  port: 8090
+
+# 应用名称
+spring:
+  application:
+    name: spring-boot-commons
+
+  # 该工程需要配置一个数据源，mysql则需要再引入一个mysql连接包
+#  datasource:
+#    type: com.zaxxer.hikari.HikariDataSource
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/default_db?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&allowMultiQueries=true
+#    username: test_user
+#    password: ysys1314
